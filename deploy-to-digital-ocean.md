@@ -1,4 +1,6 @@
-Learn how to deploy your application bundle to Digital Ocean in this demo by Jeremy Rickard
+## Demo by Jeremy Rickard
+
+#### Learn how to deploy your application bundle to Digital Ocean
 
 https://www.youtube.com/watch?v=ciA1YuGOIo4&t=11s
 
