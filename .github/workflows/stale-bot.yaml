@@ -1,0 +1,85 @@
+# Mark PRs and Issues as stale after a given time. 
+# Closes stale issues but not stale PRs.
+
+name: 'Mark stale issues and PR'
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v8
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: | 
+                            The Porter project currently lacks enough contributors to adequately respond to all issues.
+                            This bot triages un-triaged issues according to the following rules;
+                            After 90d of inactivity, lifecycle/stale is applied
+                            After 30d of inactivity since lifecycle/stale was applied, lifecycle/rotten is applied
+                            After 30d of inactivity since lifecycle/rotten was applied, the issue is closed
+                            You can;
+                            Mark this issue as fresh with /remove-lifecycle stale
+                            Close this issue with /close
+                            /lifecycle stale
+          days-before-issue-stale: 90  
+          exempt-issue-labels: 'lifecycle/rotten, lifecycle/closed'
+          days-before-issue-close: -1
+          stale-issue-label: 'lifecycle/stale'
+          remove-issue-stale-when-updated: true
+          debug-only: true
+
+  rotten:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v8
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: | 
+                            The Porter project currently lacks enough contributors to adequately respond to all issues.
+                            This bot triages un-triaged issues according to the following rules;
+                            After 90d of inactivity, lifecycle/stale is applied
+                            After 30d of inactivity since lifecycle/stale was applied, lifecycle/rotten is applied
+                            After 30d of inactivity since lifecycle/rotten was applied, the issue is closed
+                            You can;
+                            Mark this issue as fresh with /remove-lifecycle stale
+                            Close this issue with /close
+                            /lifecycle rotten
+          days-before-issue-stale: 30
+          only-issue-labels: 'lifecycle/stale'
+          days-before-issue-close: -1
+          stale-issue-label: 'lifecycle/rotten'
+          labels-to-remove-when-stale: 'lifecycle/stale'
+          remove-issue-stale-when-updated: true
+
+  close:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v8
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: | 
+                            The Porter project currently lacks enough contributors to adequately respond to all issues.
+                            This bot triages un-triaged issues according to the following rules;
+                            After 90d of inactivity, lifecycle/stale is applied
+                            After 30d of inactivity since lifecycle/stale was applied, lifecycle/rotten is applied
+                            After 30d of inactivity since lifecycle/rotten was applied, the issue is closed
+                            You can;
+                            Mark this issue as fresh with /remove-lifecycle stale
+                            Close this issue with /close
+                            /lifecycle close
+          days-before-issue-stale: 30
+          only-issue-labels: 'lifecycle/rotten'
+          days-before-issue-close: 0
+          stale-issue-label: 'lifecycle/closed'
+          labels-to-remove-when-stale: 'lifecycle/rotten'
