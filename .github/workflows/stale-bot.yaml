@@ -4,7 +4,7 @@
 name: 'Mark stale issues and PR'
 on:
   schedule:
-    - cron: '30 1 * * *'
+    - cron: '50 2 * * *'
 
 jobs:
   stale:
@@ -26,7 +26,7 @@ jobs:
                             Mark this issue as fresh with /remove-lifecycle stale
                             Close this issue with /close
                             /lifecycle stale
-          days-before-issue-stale: 90  
+          days-before-issue-stale: 0  
           exempt-issue-labels: 'lifecycle/rotten, lifecycle/closed'
           days-before-issue-close: -1
           stale-issue-label: 'lifecycle/stale'
