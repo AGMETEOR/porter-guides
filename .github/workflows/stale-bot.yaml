@@ -2,9 +2,7 @@
 # Closes stale issues but not stale PRs.
 
 name: 'Mark stale issues and PR'
-on:
-  schedule:
-    - cron: '50 2 * * *'
+on: workflow_dispatch
 
 jobs:
   stale:
