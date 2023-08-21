@@ -113,6 +113,6 @@ jobs:
         run: |
           issue_number="${{ github.event.issue.number }}"
           echo "Removing labels from issue $issue_number"
-          curl -X DELETE -H "Authorization: token ${secrets.STALE_BOT}" \
+          curl -X DELETE -H "Authorization: token ${{secrets.STALE_BOT}}" \
                "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}/labels"
 
