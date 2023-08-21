@@ -118,7 +118,7 @@ jobs:
           labels_to_remove=("lifecycle/stale" "lifecycle/rotten")
           
           # Get issue state
-         issue_state="${{ github.event.issue.state }}" 
+          issue_state="${{ github.event.issue.state }}" 
           # Proceed with label removal if the issue is open
           if [[ $issue_state == "open" ]]; then
             for label in "${labels_to_remove[@]}"; do
