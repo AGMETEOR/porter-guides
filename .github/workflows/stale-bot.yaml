@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/stale@v8
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.STALE_BOT }}
           stale-issue-message: | 
                             The Porter project currently lacks enough contributors to adequately respond to all issues.
 
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/stale@v8
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.STALE_BOT }}
           stale-issue-message: | 
                             The Porter project currently lacks enough contributors to adequately respond to all issues.
 
@@ -74,7 +74,7 @@ jobs:
     steps:
       - uses: actions/stale@v8
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.STALE_BOT }}
           stale-issue-message: | 
                             The Porter project currently lacks enough contributors to adequately respond to all issues.
 
