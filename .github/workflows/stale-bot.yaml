@@ -105,11 +105,10 @@ jobs:
           stale-issue-label: 'lifecycle/closed'
           labels-to-remove-when-stale: 'lifecycle/rotten'
 
-  commentclose:
+  resetlifecycle:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      pull-requests: write
     if: ${{ github.event.comment.body == '/remove-lifecycle stale' }}
     steps:
       - name: Remove labels
@@ -119,7 +118,6 @@ jobs:
           
           # Get issue state
           issue_state="${{ github.event.issue.state }}" 
-          # Proceed with label removal if the issue is open
           if [[ $issue_state == "open" ]]; then
             for label in "${labels_to_remove[@]}"; do
               echo "Removing '$label' label from issue $issue_number"
@@ -128,4 +126,26 @@ jobs:
             done
           else
             echo "Issue is closed, no labels to remove."
+          fi
+
+  commentclose:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    if: ${{ github.event.comment.body == '/remove-lifecycle close' }}
+    steps:
+      - name: Close issue
+        run: |
+          issue_number="${{ github.event.issue.number }}"
+          
+          # Get issue state
+          issue_state="${{ github.event.issue.state }}" 
+          if [[ $issue_state == "open" ]]; then
+            echo "Closing '$label' label from issue $issue_number"
+            curl -X PATCH -H "Authorization: token ${{secrets.STALE_BOT}}" \
+                 -H "Content-Type: application/json" \
+                 -d '{"state": "closed"}' \
+                 "https://api.github.com/repos/${{ github.repository }}/issues/${issue_number}"
+          else
+            echo "Issue already closed"
           fi
