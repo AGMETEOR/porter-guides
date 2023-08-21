@@ -2,7 +2,10 @@
 # Closes stale issues but not stale PRs.
 
 name: 'Mark stale issues and PR'
-on: workflow_dispatch
+  #on: workflow_dispatch
+on:
+  schedule:
+    - cron: "*/5 * * * *"
 
 jobs:
   stale:
@@ -59,7 +62,7 @@ jobs:
                             * Close this issue with /close
 
                             /lifecycle rotten
-          days-before-issue-stale: 0.00138888889
+          days-before-issue-stale: 0.00694444444
           only-issue-labels: 'lifecycle/stale'
           days-before-issue-close: -1
           stale-issue-label: 'lifecycle/rotten'
@@ -90,7 +93,7 @@ jobs:
                             * Close this issue with /close
 
                             /lifecycle close
-          days-before-issue-stale: 0.00138888889
+          days-before-issue-stale: 0.00694444444
           only-issue-labels: 'lifecycle/rotten'
           days-before-issue-close: 0
           stale-issue-label: 'lifecycle/closed'
