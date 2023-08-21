@@ -46,15 +46,20 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: | 
                             The Porter project currently lacks enough contributors to adequately respond to all issues.
+
                             This bot triages un-triaged issues according to the following rules;
-                            After 90d of inactivity, lifecycle/stale is applied
-                            After 30d of inactivity since lifecycle/stale was applied, lifecycle/rotten is applied
-                            After 30d of inactivity since lifecycle/rotten was applied, the issue is closed
+
+                            * After 90d of inactivity, lifecycle/stale is applied
+                            * After 30d of inactivity since lifecycle/stale was applied, lifecycle/rotten is applied
+                            * After 30d of inactivity since lifecycle/rotten was applied, the issue is closed
+
                             You can;
-                            Mark this issue as fresh with /remove-lifecycle stale
-                            Close this issue with /close
+
+                            * Mark this issue as fresh with /remove-lifecycle stale
+                            * Close this issue with /close
+
                             /lifecycle rotten
-          days-before-issue-stale: 30
+          days-before-issue-stale: 0.00347222222
           only-issue-labels: 'lifecycle/stale'
           days-before-issue-close: -1
           stale-issue-label: 'lifecycle/rotten'
